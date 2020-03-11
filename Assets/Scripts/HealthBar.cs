@@ -29,7 +29,7 @@ public class HealthBar : MonoBehaviour
         {
             _currentHealth = 0;
         }
-        StartCoroutine(DrawHealth());
+        StartCoroutine(SetHealth(1));
     }
 
     public void TakeHill(float hill)
@@ -40,20 +40,29 @@ public class HealthBar : MonoBehaviour
         {
             _currentHealth = _maxHealth;
         }
-        StartCoroutine(DrawHealth());
+        StartCoroutine(SetHealth(1));
     }
 
-    private IEnumerator DrawHealth()
+    private IEnumerator SetHealth(float durationTime)
     {
         _textHealth.text = _currentHealth.ToString() + " / " + _maxHealth.ToString();
-        float previous = _previousHealth / _maxHealth;
-        float current = _currentHealth / _maxHealth;
-        float speedChange = 1 / _speedChangeHealth;
-        float delta = (current - previous) * speedChange;
-        for (int i = 0; i < _speedChangeHealth; i++)
+        float pastTime = 0;
+        while(pastTime <= durationTime + 1)
         {
-            _healthBar.value += delta;
+            _healthBar.value += Mathf.Lerp(_previousHealth / _maxHealth, _currentHealth / _maxHealth, pastTime / durationTime);
+            pastTime += Time.deltaTime;
             yield return null;
         }
+
+        //_textHealth.text = _currentHealth.ToString() + " / " + _maxHealth.ToString();
+        //float previous = _previousHealth / _maxHealth;
+        //float current = _currentHealth / _maxHealth;
+        //float speedChange = 1 / _speedChangeHealth;
+        //float delta = (current - previous) * speedChange;
+        //for (int i = 0; i < _speedChangeHealth; i++)
+        //{
+        //    _healthBar.value += delta;
+        //    yield return null;
+        //}
     }
 }
