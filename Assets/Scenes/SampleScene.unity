@@ -458,7 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textHealth: {fileID: 81659673}
   _maxHealth: 100
-  _speedChangeHealth: 50
+  _speedChangeHealth: 10
 --- !u!114 &396165873
 MonoBehaviour:
   m_ObjectHideFlags: 0
