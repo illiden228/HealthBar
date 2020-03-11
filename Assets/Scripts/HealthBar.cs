@@ -47,9 +47,9 @@ public class HealthBar : MonoBehaviour
     {
         _textHealth.text = _currentHealth.ToString() + " / " + _maxHealth.ToString();
         float pastTime = 0;
-        while(pastTime <= durationTime + 1)
+        while(pastTime <= durationTime + 0.05)
         {
-            _healthBar.value += Mathf.Lerp(_previousHealth / _maxHealth, _currentHealth / _maxHealth, pastTime / durationTime);
+            _healthBar.value = Mathf.Lerp(_previousHealth / _maxHealth, _currentHealth / _maxHealth, pastTime / durationTime);
             pastTime += Time.deltaTime;
             yield return null;
         }
